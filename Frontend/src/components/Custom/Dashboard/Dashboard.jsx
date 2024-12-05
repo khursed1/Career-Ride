@@ -1,7 +1,7 @@
 import Header from "../Header"
-import AddResums from "./AddResums"
-import ResumeList from "./ResumeList"
+import ResumeListCard from "./ResumeListCard"
 import resumeEg from "../../../assets/resume_eg.jpg"
+import AddResumsCard from "./AddResumsCard"
 
 const Dashboard = () => {
     return (
@@ -13,11 +13,11 @@ const Dashboard = () => {
                 </h2>
                 <p className="pt-3 text-xl text-gray-600 px-2">Create AI powered Resumes to land a job</p>
                 <div className="flex gap-4">
-                    <AddResums />
-                    <ResumeList img={resumeEg}/>
-                    <ResumeList img={null}/>
-                    <ResumeList img={null}/>
-                    <ResumeList img={null}/>
+                    <AddResumsCard />
+                    <ResumeListCard img={resumeEg} />
+                    <ResumeListCard img={null} />
+                    <ResumeListCard img={null} />
+                    <ResumeListCard img={null} />
                     {/* grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 */}
                 </div>
             </div>

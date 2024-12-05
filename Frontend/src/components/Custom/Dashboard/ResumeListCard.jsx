@@ -1,4 +1,4 @@
-const ResumeList = ({ img }) => {
+const ResumeListCard = ({ img }) => {
     return (
         <div className="pt-5">
             {
@@ -15,4 +15,4 @@ const ResumeList = ({ img }) => {
     )
 }
 
-export default ResumeList
+export default ResumeListCard;

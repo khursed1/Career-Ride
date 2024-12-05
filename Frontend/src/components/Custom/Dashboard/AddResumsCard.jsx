@@ -1,5 +1,5 @@
 import addIcon from "../../../assets/AddResumeIcon.svg"
-const AddResums = () => {
+const AddResumsCard = () => {
     return (
         <div className="">
             <div className="pt-5">
@@ -14,4 +14,4 @@ const AddResums = () => {
     )
 }
 
-export default AddResums
+export default AddResumsCard;
