@@ -1,31 +1,34 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import App from "../../App"
+import LoginSignup from "./LoginSignup"
+import Dashboard from "./Dashboard/Dashboard"
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import App from "../../App";
-import Dashboard from "./Dashboard/Dashboard";
-import LoginSignup from "./LoginSignup";
+import ResumeEditorLayout from "./Resume/ResumeEditorLayout"
 
 const Body = () => {
-  const routes = createBrowserRouter([
-    {
-      path: "/",
-      element: <App />,
-    },
-    {
-      path: "/auth",
-      element: <LoginSignup />,
-    },
-    {
-      path: "/dashboard",
-      element: <Dashboard />,
-    },
-  ]);
-  return (
-    <>
-      <RouterProvider router={routes} />
-      <ToastContainer />
-    </>
-  );
-};
-
+    const routes = createBrowserRouter([
+        {
+            path: '/',
+            element: <App />
+        },
+        {
+            path: '/auth',
+            element: <LoginSignup />
+        },
+        {
+            path: '/dashboard',
+            element: <Dashboard />
+        },
+        {
+            path: '/dashboard/resume',
+            element: <ResumeEditorLayout />
+        }
+    ])
+    return (
+        <>
+            <RouterProvider router={routes} />
+            <ToastContainer />
+        </>
+    )
+}
 export default Body;
