@@ -1,0 +1,9 @@
+#scrollable-content {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  
+  #scrollable-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  

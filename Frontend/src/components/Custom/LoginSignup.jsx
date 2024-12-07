@@ -63,15 +63,15 @@ const LoginSignup = () => {
 
       <div>
         <div className="container flex flex-col m-auto mt-[0px] pb-[30px]">
-          <div className=" flex flex-col items-center gap-[9px] mt-[30px]">
+          <div className=" flex flex-col items-center gap-[5px] mt-[0px]">
             <div className=" text-[#9f5bff] text-[36px] font-bold">
               {isLogin ? "Sign In" : "Sign Up"}
             </div>
             <div className=" w-[80px] h-[6px] bg-[#9f5bff] rounded-lg"></div>
           </div>
-          <div className="mt-[55px] flex flex-col gap-6">
+          <div className="mt-[45px] flex flex-col gap-6">
             {!isLogin ? (
-              <div className="flex items-center m-auto w-[480px] h-20 bg-slate-100 rounded-lg">
+              <div className="flex items-center m-auto w-[480px] h-[70px] bg-slate-100 rounded-lg">
                 <img src={user_icon} className=" mt-0 mb-0 mr-7 ml-7" />
                 <input
                   type="text"
@@ -84,7 +84,7 @@ const LoginSignup = () => {
             ) : (
               ""
             )}
-            <div className="flex items-center m-auto w-[480px] h-20 bg-slate-100 rounded-lg">
+            <div className="flex items-center m-auto w-[480px] h-[70px] bg-slate-100 rounded-lg">
               <img src={email_icon} className=" mt-0 mb-0 mr-7 ml-7" />
               <input
                 type="email"
@@ -94,7 +94,7 @@ const LoginSignup = () => {
                 onChange={(e) => setemail(e.target.value)}
               />
             </div>
-            <div className="flex items-center m-auto w-[480px] h-20 bg-slate-100 rounded-lg ">
+            <div className="flex items-center m-auto w-[480px] h-[70px] bg-slate-100 rounded-lg ">
               <img src={pass_icon} className=" mt-0 mb-0 mr-7 ml-7" />
               <input
                 type="password"
@@ -105,21 +105,28 @@ const LoginSignup = () => {
               />
             </div>
           </div>
-          <div className="pl-[30%] mt-[27px] text-[#797979]">
-            Forgot Password?{" "}
-            <span className=" text-[#9f5bff] cursor-pointer">Reset</span>
-          </div>
-          {!isLogin && (
-            <div className="pl-[30%] mt-[27px] text-[#797979]">
-              Already Existing User?
-              <button
-                className=" text-[#9f5bff] cursor-pointer"
-                onClick={() => setLogin(true)}
-              >
-                Login
-              </button>
+          <div>
+            <div className="pl-[32%] mt-[10px] text-[#797979]">
+              Forgot Password?{" "}
+              <span className=" text-[#9f5bff] cursor-pointer">Reset</span>
             </div>
-          )}
+            {isLogin && (
+              <div className="pl-[32%] text-[#797979]">
+                New User? <span className="text-[#9f5bff] cursor-pointer" onClick={()=>setLogin(false)}>Create account</span>
+              </div>
+            )}
+            {!isLogin && (
+              <div className="pl-[32%] mt-[10px] text-[#797979]">
+                Already Existing User?
+                <button
+                  className=" text-[#9f5bff] cursor-pointer"
+                  onClick={() => setLogin(true)}
+                >
+                  Sign In
+                </button>
+              </div>
+            )}
+          </div>
           <div className="flex flex-row gap-7 items-center justify-center">
             {isLogin ? (
               <>
