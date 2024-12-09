@@ -15,7 +15,7 @@ const AddSummery = () => {
         })
     }
     return (
-        <div className="p-5 shadow-xl rounded-lg">
+        <div className="p-5 rounded-lg">
             <h2 className="font-bold text-lg">Professional Summary</h2>
             <p className="font-medium text-md">Add sort Summary</p>
             <form>
