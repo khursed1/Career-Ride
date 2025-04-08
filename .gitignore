@@ -15,6 +15,7 @@ lerna-debug.log*
 frontend/dist/
 frontend/dist-ssr/
 backend/dist/
+frontend/package-lock.json
 
 # Local environment files
 frontend/.env
@@ -37,3 +38,4 @@ backend/.env
 Thumbs.db
 ehthumbs.db
 */pnpm-lock.yaml
+Frontend/package-lock.json
