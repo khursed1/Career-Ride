@@ -14,8 +14,26 @@ const AddExperience = () => {
     const [experienceList, setExperienceList] = useState([
         formField
     ]);
-    const handleChange = (index, event) => {
 
+    const handleChange = (index, event) => {
+        //THis function is used for handling the input change whenever user type iinto the fields
+        const newEntries = experienceList.slice();
+        const { name, value } = event.target;
+        newEntries[index][name] = value;
+        setExperienceList(newEntries);
+
+    }
+    const handleRichTextChange = (e, name, index) => {
+
+
+    }
+    const AddNewExperience = () => {
+        setExperienceList([...experienceList, formField]);
+    }
+
+    const RemoveExperience = () => {
+        // in future we need to remove experience based on index so that UX is great
+        setExperienceList(experienceList => experienceList.slice(0, -1));
     }
     return (
         <div>
@@ -51,19 +69,24 @@ const AddExperience = () => {
                                 <label className="text-sm">End Date</label>
                                 <Input type="date" name="positionTitle" onChange={(event) => handleChange(index, event)} />
                             </div>
+                            <div className=" pb-3 col-span-2">
+                                {/* Text editor for adding text styles like bold, italic, 
+                    bullet lists etc */}
+                                <RichTextEditor />
+                            </div>
                         </div>
+
                     </div>
                 ))}
-                <div className=" pb-3">
-                    {/* Text editor for adding text styles like bold, italic, 
-                    bullet lists etc */}
-                    <RichTextEditor />
-                </div>
+
 
                 <div className="flex justify-between">
-                    <Button variant="outline" className=" text-primary">+ Add More Experience </Button>
+                    <div className="flex gap-2">
+                        <Button variant="outline" className=" text-primary" onClick={AddNewExperience}>+ Add More Experience </Button>
+                        <Button variant="outline" className=" text-primary" onClick={RemoveExperience}>Remove </Button>
+                    </div>
                     <Button>Save</Button>
-                </div>  
+                </div>
             </div>
         </div>
     )
