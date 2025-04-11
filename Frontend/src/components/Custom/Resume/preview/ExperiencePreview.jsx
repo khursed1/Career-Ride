@@ -18,12 +18,19 @@ const ExperiencePreview = ({ resumeInfo }) => {
                         {experience.title}
                     </h2>
                     <h2 className="text-xs flex justify-between">
-                        {experience?.companyName}, {experience?.city}, <span>{experience?.startDate}
-                            - {experience?.endDate === "" ? ("Present") : experience.endDate}</span>
+                        {experience?.companyName}, {experience?.city}, {experience?.state}
+                        <span>{experience?.startDate}
+                            - {experience?.endDate === "" ? ("Present") : experience.endDate}
+                        </span>
                     </h2>
-                    <p className="text-xs my-2">
-                        {experience.workSummary}
-                    </p>
+                    {/* <p className="text-xs my-2">
+                        {experience.workSummary} 
+                    </p> */}
+                    
+                    <div className="text-xs my-2" dangerouslySetInnerHTML={{ __html: experience?.workSummary }}>
+                        {/* THis div is used to show the rich text editor into the preview
+                        windows without html tag. Means it will be not treated as plain text */}
+                    </div>
                 </div>
             ))}
         </div>
