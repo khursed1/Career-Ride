@@ -6,6 +6,7 @@ import { Download, Edit, Edit2 } from "lucide-react";
 import editIcon from "../../../assets/Edit.svg"
 import AddSummery from "./Form/AddSummery";
 import AddExperience from "./Form/AddExperience";
+import AddEducation from "./Form/AddEducation";
 //This is used to add/edit details of resume
 const FormSection = () => {
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
@@ -28,7 +29,7 @@ const FormSection = () => {
       {/* EXPERIENCE */}
       <AddExperience />
       {/* EDUCATION */}
-
+      <AddEducation />
       {/* SKILLS */}
 
     </div>
