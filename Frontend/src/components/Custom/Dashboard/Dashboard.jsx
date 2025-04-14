@@ -10,7 +10,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const { loggedIn } = useContext(AuthContext);
-  if (!loggedIn) return navigate("/auth");
+  // if (!loggedIn) return navigate("/auth");
   return (
     <>
       <Header />

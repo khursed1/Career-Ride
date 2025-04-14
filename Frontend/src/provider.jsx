@@ -2,7 +2,12 @@ import axios from "axios";
 import { createContext, useCallback, useEffect, useState } from "react";
 
 export const AuthContext = createContext();
-const apiUrl = import.meta.env.VITE_API_URL;
+
+const baseURL = import.meta.env.VITE_SERVERURI;
+console.log(baseURL);
+export const ApiEnd = axios.create({
+  baseURL,
+});
 
 const Providers = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -12,7 +17,7 @@ const Providers = ({ children }) => {
     try {
       const {
         data: { loggedIn: logged_in, user },
-      } = await axios.get(`${apiUrl}/api/v1/loginCheckRoute`, {
+      } = await axios.get(`${baseURL}/api/v1/loginCheckRoute`, {
         withCredentials: true,
       });
 
