@@ -4,7 +4,7 @@ import { createContext, useCallback, useEffect, useState } from "react";
 export const AuthContext = createContext();
 
 const baseURL = import.meta.env.VITE_SERVERURI;
-console.log(baseURL);
+
 export const ApiEnd = axios.create({
   baseURL,
 });

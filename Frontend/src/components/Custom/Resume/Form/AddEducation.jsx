@@ -138,7 +138,7 @@ const AddEducation = () => {
             )}
           </div>
           <Button disabled={loading} onClick={onSave}>
-            {loading ? <LoaderCircle className=" animate-spin" /> : "Save"}
+            Save {loading && <LoaderCircle className=" animate-spin" />}
           </Button>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { Button } from "../../../ui/button";
 import RichTextEditor from "../RichTextEditor";
 import { ResumeInfoContext } from "../../../../context/ResumeInfoContext";
 import { ApiEnd } from "../../../../provider";
+import { LoaderCircle } from "lucide-react";
 
 const AddExperience = () => {
   const formField = {
@@ -17,6 +18,7 @@ const AddExperience = () => {
   };
 
   const [experienceList, setExperienceList] = useState([formField]);
+  const [loading, setLoading] = useState(false);
 
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
 
@@ -49,13 +51,20 @@ const AddExperience = () => {
   };
 
   const saveHandler = async () => {
-    const { data } = await ApiEnd({
-      withCredentials: true,
-      method: "POST",
-      data: experienceList,
-      url: "/api/v1/ExpAdd",
-    });
-    toast(data.success ? "success" : "failed");
+    try {
+      setLoading(true);
+      const { data } = await ApiEnd({
+        withCredentials: true,
+        method: "POST",
+        data: experienceList,
+        url: "/api/v1/ExpAdd",
+      });
+      toast(data.success ? "success" : "failed");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -142,7 +151,9 @@ const AddExperience = () => {
               Remove{" "}
             </Button>
           </div>
-          <Button onClick={saveHandler}>Save</Button>
+          <Button onClick={saveHandler}>
+            Save {loading && <LoaderCircle className=" animate-spin" />}
+          </Button>
         </div>
       </div>
     </div>

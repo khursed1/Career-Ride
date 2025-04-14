@@ -15,6 +15,7 @@ export async function education_entry(req: Request, res: Response) {
 
 export async function Update_Summery(req: Request, res: Response) {
   const data = req.body;
+
   const id = req.id;
 
   await prisma.user.update({
@@ -22,7 +23,7 @@ export async function Update_Summery(req: Request, res: Response) {
       id,
     },
     data: {
-      prof_summery: data,
+      prof_summery: data.summary,
     },
   });
 

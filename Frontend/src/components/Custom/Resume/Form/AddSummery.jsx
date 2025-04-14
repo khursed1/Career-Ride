@@ -1,11 +1,13 @@
-import { useContext } from "react";
 import { ResumeInfoContext } from "../../../../context/ResumeInfoContext";
 import { Textarea } from "../../../ui/textarea";
 import { Button } from "../../../ui/button";
 import { ApiEnd } from "../../../../provider";
+import { LoaderCircle } from "lucide-react";
+import { useContext, useState } from "react";
 
 const AddSummery = () => {
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
     //Set the data from form section to preview section
@@ -16,13 +18,24 @@ const AddSummery = () => {
     });
   };
 
-  const handleclick = async () => {
-    const { data } = await ApiEnd({
-      withCredentials: true,
-      method: "POST",
-      data: resumeInfo,
-      url: "/api/v1/Update_Summery",
-    });
+  const handleclick = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+      const { data } = await ApiEnd({
+        withCredentials: true,
+        method: "POST",
+        data: resumeInfo,
+        url: "/api/v1/Update_Summery",
+      });
+
+      toast(data.success ? "success" : "failed");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -38,7 +51,7 @@ const AddSummery = () => {
       </form>
       <div className="mt-3 flex justify-end">
         <Button type="submit" onClick={handleclick}>
-          Save
+          Save {loading && <LoaderCircle className=" animate-spin" />}
         </Button>
       </div>
     </div>

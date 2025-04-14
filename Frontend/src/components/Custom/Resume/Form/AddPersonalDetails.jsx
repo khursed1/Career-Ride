@@ -1,12 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ResumeInfoContext } from "../../../../context/ResumeInfoContext";
 import { Input } from "../../../ui/input";
 import { Button } from "../../../ui/button";
 import { toast } from "react-toastify";
 import { ApiEnd } from "../../../../provider";
+import { LoaderCircle } from "lucide-react";
 
 const AddPersonalDetails = () => {
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
+  const [loading, setloading] = useState(false);
 
   const handleInputChange = (e) => {
     //Set the data from form section to preview section
@@ -20,14 +22,21 @@ const AddPersonalDetails = () => {
   const onSave = async (e) => {
     e.preventDefault();
 
-    const { data } = await ApiEnd({
-      withCredentials: true,
-      method: "POST",
-      data: resumeInfo,
-      url: "/api/v1/personal_details",
-    });
+    try {
+      setloading(true);
+      const { data } = await ApiEnd({
+        withCredentials: true,
+        method: "POST",
+        data: resumeInfo,
+        url: "/api/v1/personal_details",
+      });
 
-    toast(data.success ? "success" : "failed");
+      toast(data.success ? "success" : "failed");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setloading(false);
+    }
   };
 
   return (
@@ -92,7 +101,9 @@ const AddPersonalDetails = () => {
           </div>
         </div>
         <div className="mt-3 flex justify-end">
-          <Button type="submit">Save</Button>
+          <Button type="submit">
+            Save {loading && <LoaderCircle className=" animate-spin" />}
+          </Button>
         </div>
       </form>
     </div>

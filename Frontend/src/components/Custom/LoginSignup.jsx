@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import email_icon from "../../assets/email.png";
 import pass_icon from "../../assets/password.png";
 import user_icon from "../../assets/person.png";
 import { AuthContext } from "../../provider";
 import { Button } from "../ui/button";
 import Header from "./Header";
+import { Loader2 } from "lucide-react";
 
 const LoginSignup = () => {
   const navigate = useNavigate();
@@ -15,7 +16,8 @@ const LoginSignup = () => {
   const [email, setemail] = useState("");
   const [pass, setpass] = useState("");
   const [isLogin, setLogin] = useState(false);
-  const apiUrl = import.meta.env.VITE_API_URL;
+  const apiUrl = import.meta.env.VITE_SERVERURI;
+  const [loading, setloading] = useState(false);
 
   const { loggedIn, setLoggedIn, setUser } = useContext(AuthContext);
   useEffect(() => {
@@ -24,37 +26,46 @@ const LoginSignup = () => {
   }, [loggedIn]);
 
   const Signinfunc = async () => {
-    const data = await axios.post(
-      `${apiUrl}/api/v1/loginRoute`,
-      {
-        username: email,
-        password: pass,
-      },
-      { withCredentials: true }
-    );
-    if (data.data.error) return toast(data.data.error);
+    try {
+      setloading(true);
 
-    toast(data.data.message);
-    setLoggedIn(true);
-    setUser(data.data.user);
+      const data = await axios.post(
+        `${apiUrl}/api/v1/loginRoute`,
+        {
+          username: email,
+          password: pass,
+        },
+        { withCredentials: true }
+      );
+      if (data.data.error) return toast(data.data.error);
+
+      toast(data.data.message);
+      setLoggedIn(true);
+      setUser(data.data.user);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setloading(false);
+    }
   };
 
   const Signupfunc = async () => {
-    const data = await axios.post(`${apiUrl}/api/v1/signupRoute`, {
-      name,
-      username: email,
-      password: pass,
-    });
-    if (data.status === 201) {
-      toast("Signup Successfully");
-
-      setTimeout(() => {
+    try {
+      setloading(true);
+      const data = await axios.post(`${apiUrl}/api/v1/signupRoute`, {
+        name,
+        username: email,
+        password: pass,
+      });
+      if (data.status === 201) {
+        toast("Signup Successfully");
         setLogin(!isLogin);
-      }, 2000);
-
-      return;
+      } else toast("error happend");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setloading(false);
     }
-    toast(data.data.message);
   };
 
   return (
@@ -112,7 +123,13 @@ const LoginSignup = () => {
             </div>
             {isLogin && (
               <div className="pl-[32%] text-[#797979]">
-                New User? <span className="text-[#9f5bff] cursor-pointer" onClick={()=>setLogin(false)}>Create account</span>
+                New User?{" "}
+                <span
+                  className="text-[#9f5bff] cursor-pointer"
+                  onClick={() => setLogin(false)}
+                >
+                  Create account
+                </span>
               </div>
             )}
             {!isLogin && (
@@ -130,11 +147,15 @@ const LoginSignup = () => {
           <div className="flex flex-row gap-7 items-center justify-center">
             {isLogin ? (
               <>
-                <Button onClick={Signinfunc}>Sign In</Button>
+                <Button onClick={Signinfunc}>
+                  Sign In {loading && <Loader2 className="animate-spin" />}{" "}
+                </Button>
               </>
             ) : (
               <>
-                <Button onClick={Signupfunc}>Sign Up</Button>
+                <Button onClick={Signupfunc}>
+                  Sign Up {loading && <Loader2 className="animate-spin" />}{" "}
+                </Button>
               </>
             )}
           </div>
