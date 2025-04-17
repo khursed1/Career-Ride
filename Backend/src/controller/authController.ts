@@ -95,9 +95,9 @@ export async function loginCheckFunc(req: Request, res: Response) {
 }
 
 export async function SendResetLink(req: Request, res: Response) {
-  const { email } = req.body;
+  const { username } = req.body;
 
-  const user = await prisma.user.findUnique({ where: { email } });
+  const user = await prisma.user.findUnique({ where: { username } });
   if (!user) {
     res.status(404).json({ message: "User not found" });
     return;
@@ -108,13 +108,13 @@ export async function SendResetLink(req: Request, res: Response) {
   const resetTokenExpiry = new Date(Date.now() + 3600000); // 1 hour expiry
 
   await prisma.user.update({
-    where: { email },
+    where: { username },
     data: { resetToken, resetTokenExpiry },
   });
 
   const resetLink = `${process.env.CORSORIGIN}/resetpassword?token=${resetToken}`;
 
-  await sendPasswordResetEmail(email, resetLink);
+  await sendPasswordResetEmail(username, resetLink);
 
   res.json({
     success: true,
