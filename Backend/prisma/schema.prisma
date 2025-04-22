@@ -43,8 +43,8 @@ model Education {
   endDate        String
   description    String
 
-  basicdetails    BasicDetails @relation(fields: [BasicDetails_id], references: [id])
-  BasicDetails_id String       @db.ObjectId
+  basicdetails    BasicDetails? @relation(fields: [BasicDetails_id], references: [id])
+  BasicDetails_id String?       @db.ObjectId
 }
 
 model Profession {
@@ -56,6 +56,6 @@ model Profession {
   startDate       String
   endDate         String
   workSummary     String
-  basicdetails    BasicDetails @relation(fields: [BasicDetails_id], references: [id])
-  BasicDetails_id String       @db.ObjectId
+  basicdetails    BasicDetails? @relation(fields: [BasicDetails_id], references: [id])
+  BasicDetails_id String?       @db.ObjectId
 }

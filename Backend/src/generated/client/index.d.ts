@@ -1092,37 +1092,6 @@ export namespace Prisma {
 
 
   /**
-   * Count Type UserCountOutputType
-   */
-
-  export type UserCountOutputType = {
-    basidetails: number
-  }
-
-  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    basidetails?: boolean | UserCountOutputTypeCountBasidetailsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserCountOutputType
-     */
-    select?: UserCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountBasidetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BasicDetailsWhereInput
-  }
-
-
-  /**
    * Count Type BasicDetailsCountOutputType
    */
 
@@ -1339,7 +1308,6 @@ export namespace Prisma {
     resetToken?: boolean
     resetTokenExpiry?: boolean
     basidetails?: boolean | user$basidetailsArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
 
@@ -1356,13 +1324,12 @@ export namespace Prisma {
   export type userOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "username" | "password" | "resetToken" | "resetTokenExpiry", ExtArgs["result"]["user"]>
   export type userInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     basidetails?: boolean | user$basidetailsArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $userPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "user"
     objects: {
-      basidetails: Prisma.$BasicDetailsPayload<ExtArgs>[]
+      basidetails: Prisma.$BasicDetailsPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1734,7 +1701,7 @@ export namespace Prisma {
    */
   export interface Prisma__userClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    basidetails<T extends user$basidetailsArgs<ExtArgs> = {}>(args?: Subset<T, user$basidetailsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BasicDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    basidetails<T extends user$basidetailsArgs<ExtArgs> = {}>(args?: Subset<T, user$basidetailsArgs<ExtArgs>>): Prisma__BasicDetailsClient<$Result.GetResult<Prisma.$BasicDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2156,11 +2123,6 @@ export namespace Prisma {
      */
     include?: BasicDetailsInclude<ExtArgs> | null
     where?: BasicDetailsWhereInput
-    orderBy?: BasicDetailsOrderByWithRelationInput | BasicDetailsOrderByWithRelationInput[]
-    cursor?: BasicDetailsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: BasicDetailsScalarFieldEnum | BasicDetailsScalarFieldEnum[]
   }
 
   /**
@@ -5434,7 +5396,7 @@ export namespace Prisma {
     password?: StringFilter<"user"> | string
     resetToken?: DateTimeNullableFilter<"user"> | Date | string | null
     resetTokenExpiry?: DateTimeNullableFilter<"user"> | Date | string | null
-    basidetails?: BasicDetailsListRelationFilter
+    basidetails?: XOR<BasicDetailsNullableScalarRelationFilter, BasicDetailsWhereInput> | null
   }
 
   export type userOrderByWithRelationInput = {
@@ -5444,7 +5406,7 @@ export namespace Prisma {
     password?: SortOrder
     resetToken?: SortOrder
     resetTokenExpiry?: SortOrder
-    basidetails?: BasicDetailsOrderByRelationAggregateInput
+    basidetails?: BasicDetailsOrderByWithRelationInput
   }
 
   export type userWhereUniqueInput = Prisma.AtLeast<{
@@ -5457,7 +5419,7 @@ export namespace Prisma {
     password?: StringFilter<"user"> | string
     resetToken?: DateTimeNullableFilter<"user"> | Date | string | null
     resetTokenExpiry?: DateTimeNullableFilter<"user"> | Date | string | null
-    basidetails?: BasicDetailsListRelationFilter
+    basidetails?: XOR<BasicDetailsNullableScalarRelationFilter, BasicDetailsWhereInput> | null
   }, "id" | "username">
 
   export type userOrderByWithAggregationInput = {
@@ -5521,6 +5483,7 @@ export namespace Prisma {
     id?: string
     phone?: string
     email?: string
+    user_id?: string
     AND?: BasicDetailsWhereInput | BasicDetailsWhereInput[]
     OR?: BasicDetailsWhereInput[]
     NOT?: BasicDetailsWhereInput | BasicDetailsWhereInput[]
@@ -5529,11 +5492,10 @@ export namespace Prisma {
     job_title?: StringFilter<"BasicDetails"> | string
     address?: StringFilter<"BasicDetails"> | string
     prof_summery?: StringNullableFilter<"BasicDetails"> | string | null
-    user_id?: StringFilter<"BasicDetails"> | string
     education?: EducationListRelationFilter
     profession?: ProfessionListRelationFilter
     user?: XOR<UserScalarRelationFilter, userWhereInput>
-  }, "id" | "phone" | "email">
+  }, "id" | "phone" | "email" | "user_id">
 
   export type BasicDetailsOrderByWithAggregationInput = {
     id?: SortOrder
@@ -5717,7 +5679,7 @@ export namespace Prisma {
     password: string
     resetToken?: Date | string | null
     resetTokenExpiry?: Date | string | null
-    basidetails?: BasicDetailsCreateNestedManyWithoutUserInput
+    basidetails?: BasicDetailsCreateNestedOneWithoutUserInput
   }
 
   export type userUncheckedCreateInput = {
@@ -5727,7 +5689,7 @@ export namespace Prisma {
     password: string
     resetToken?: Date | string | null
     resetTokenExpiry?: Date | string | null
-    basidetails?: BasicDetailsUncheckedCreateNestedManyWithoutUserInput
+    basidetails?: BasicDetailsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type userUpdateInput = {
@@ -5736,7 +5698,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     resetToken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    basidetails?: BasicDetailsUpdateManyWithoutUserNestedInput
+    basidetails?: BasicDetailsUpdateOneWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateInput = {
@@ -5745,7 +5707,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     resetToken?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resetTokenExpiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    basidetails?: BasicDetailsUncheckedUpdateManyWithoutUserNestedInput
+    basidetails?: BasicDetailsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type userCreateManyInput = {
@@ -6038,14 +6000,9 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type BasicDetailsListRelationFilter = {
-    every?: BasicDetailsWhereInput
-    some?: BasicDetailsWhereInput
-    none?: BasicDetailsWhereInput
-  }
-
-  export type BasicDetailsOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type BasicDetailsNullableScalarRelationFilter = {
+    is?: BasicDetailsWhereInput | null
+    isNot?: BasicDetailsWhereInput | null
   }
 
   export type userCountOrderByAggregateInput = {
@@ -6278,18 +6235,16 @@ export namespace Prisma {
     BasicDetails_id?: SortOrder
   }
 
-  export type BasicDetailsCreateNestedManyWithoutUserInput = {
-    create?: XOR<BasicDetailsCreateWithoutUserInput, BasicDetailsUncheckedCreateWithoutUserInput> | BasicDetailsCreateWithoutUserInput[] | BasicDetailsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: BasicDetailsCreateOrConnectWithoutUserInput | BasicDetailsCreateOrConnectWithoutUserInput[]
-    createMany?: BasicDetailsCreateManyUserInputEnvelope
-    connect?: BasicDetailsWhereUniqueInput | BasicDetailsWhereUniqueInput[]
+  export type BasicDetailsCreateNestedOneWithoutUserInput = {
+    create?: XOR<BasicDetailsCreateWithoutUserInput, BasicDetailsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: BasicDetailsCreateOrConnectWithoutUserInput
+    connect?: BasicDetailsWhereUniqueInput
   }
 
-  export type BasicDetailsUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<BasicDetailsCreateWithoutUserInput, BasicDetailsUncheckedCreateWithoutUserInput> | BasicDetailsCreateWithoutUserInput[] | BasicDetailsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: BasicDetailsCreateOrConnectWithoutUserInput | BasicDetailsCreateOrConnectWithoutUserInput[]
-    createMany?: BasicDetailsCreateManyUserInputEnvelope
-    connect?: BasicDetailsWhereUniqueInput | BasicDetailsWhereUniqueInput[]
+  export type BasicDetailsUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<BasicDetailsCreateWithoutUserInput, BasicDetailsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: BasicDetailsCreateOrConnectWithoutUserInput
+    connect?: BasicDetailsWhereUniqueInput
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6301,32 +6256,24 @@ export namespace Prisma {
     unset?: boolean
   }
 
-  export type BasicDetailsUpdateManyWithoutUserNestedInput = {
-    create?: XOR<BasicDetailsCreateWithoutUserInput, BasicDetailsUncheckedCreateWithoutUserInput> | BasicDetailsCreateWithoutUserInput[] | BasicDetailsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: BasicDetailsCreateOrConnectWithoutUserInput | BasicDetailsCreateOrConnectWithoutUserInput[]
-    upsert?: BasicDetailsUpsertWithWhereUniqueWithoutUserInput | BasicDetailsUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: BasicDetailsCreateManyUserInputEnvelope
-    set?: BasicDetailsWhereUniqueInput | BasicDetailsWhereUniqueInput[]
-    disconnect?: BasicDetailsWhereUniqueInput | BasicDetailsWhereUniqueInput[]
-    delete?: BasicDetailsWhereUniqueInput | BasicDetailsWhereUniqueInput[]
-    connect?: BasicDetailsWhereUniqueInput | BasicDetailsWhereUniqueInput[]
-    update?: BasicDetailsUpdateWithWhereUniqueWithoutUserInput | BasicDetailsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: BasicDetailsUpdateManyWithWhereWithoutUserInput | BasicDetailsUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: BasicDetailsScalarWhereInput | BasicDetailsScalarWhereInput[]
+  export type BasicDetailsUpdateOneWithoutUserNestedInput = {
+    create?: XOR<BasicDetailsCreateWithoutUserInput, BasicDetailsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: BasicDetailsCreateOrConnectWithoutUserInput
+    upsert?: BasicDetailsUpsertWithoutUserInput
+    disconnect?: BasicDetailsWhereInput | boolean
+    delete?: BasicDetailsWhereInput | boolean
+    connect?: BasicDetailsWhereUniqueInput
+    update?: XOR<XOR<BasicDetailsUpdateToOneWithWhereWithoutUserInput, BasicDetailsUpdateWithoutUserInput>, BasicDetailsUncheckedUpdateWithoutUserInput>
   }
 
-  export type BasicDetailsUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<BasicDetailsCreateWithoutUserInput, BasicDetailsUncheckedCreateWithoutUserInput> | BasicDetailsCreateWithoutUserInput[] | BasicDetailsUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: BasicDetailsCreateOrConnectWithoutUserInput | BasicDetailsCreateOrConnectWithoutUserInput[]
-    upsert?: BasicDetailsUpsertWithWhereUniqueWithoutUserInput | BasicDetailsUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: BasicDetailsCreateManyUserInputEnvelope
-    set?: BasicDetailsWhereUniqueInput | BasicDetailsWhereUniqueInput[]
-    disconnect?: BasicDetailsWhereUniqueInput | BasicDetailsWhereUniqueInput[]
-    delete?: BasicDetailsWhereUniqueInput | BasicDetailsWhereUniqueInput[]
-    connect?: BasicDetailsWhereUniqueInput | BasicDetailsWhereUniqueInput[]
-    update?: BasicDetailsUpdateWithWhereUniqueWithoutUserInput | BasicDetailsUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: BasicDetailsUpdateManyWithWhereWithoutUserInput | BasicDetailsUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: BasicDetailsScalarWhereInput | BasicDetailsScalarWhereInput[]
+  export type BasicDetailsUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<BasicDetailsCreateWithoutUserInput, BasicDetailsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: BasicDetailsCreateOrConnectWithoutUserInput
+    upsert?: BasicDetailsUpsertWithoutUserInput
+    disconnect?: BasicDetailsWhereInput | boolean
+    delete?: BasicDetailsWhereInput | boolean
+    connect?: BasicDetailsWhereUniqueInput
+    update?: XOR<XOR<BasicDetailsUpdateToOneWithWhereWithoutUserInput, BasicDetailsUpdateWithoutUserInput>, BasicDetailsUncheckedUpdateWithoutUserInput>
   }
 
   export type EducationCreateNestedManyWithoutBasicdetailsInput = {
@@ -6605,39 +6552,39 @@ export namespace Prisma {
     create: XOR<BasicDetailsCreateWithoutUserInput, BasicDetailsUncheckedCreateWithoutUserInput>
   }
 
-  export type BasicDetailsCreateManyUserInputEnvelope = {
-    data: BasicDetailsCreateManyUserInput | BasicDetailsCreateManyUserInput[]
-  }
-
-  export type BasicDetailsUpsertWithWhereUniqueWithoutUserInput = {
-    where: BasicDetailsWhereUniqueInput
+  export type BasicDetailsUpsertWithoutUserInput = {
     update: XOR<BasicDetailsUpdateWithoutUserInput, BasicDetailsUncheckedUpdateWithoutUserInput>
     create: XOR<BasicDetailsCreateWithoutUserInput, BasicDetailsUncheckedCreateWithoutUserInput>
+    where?: BasicDetailsWhereInput
   }
 
-  export type BasicDetailsUpdateWithWhereUniqueWithoutUserInput = {
-    where: BasicDetailsWhereUniqueInput
+  export type BasicDetailsUpdateToOneWithWhereWithoutUserInput = {
+    where?: BasicDetailsWhereInput
     data: XOR<BasicDetailsUpdateWithoutUserInput, BasicDetailsUncheckedUpdateWithoutUserInput>
   }
 
-  export type BasicDetailsUpdateManyWithWhereWithoutUserInput = {
-    where: BasicDetailsScalarWhereInput
-    data: XOR<BasicDetailsUpdateManyMutationInput, BasicDetailsUncheckedUpdateManyWithoutUserInput>
+  export type BasicDetailsUpdateWithoutUserInput = {
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    job_title?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    prof_summery?: NullableStringFieldUpdateOperationsInput | string | null
+    education?: EducationUpdateManyWithoutBasicdetailsNestedInput
+    profession?: ProfessionUpdateManyWithoutBasicdetailsNestedInput
   }
 
-  export type BasicDetailsScalarWhereInput = {
-    AND?: BasicDetailsScalarWhereInput | BasicDetailsScalarWhereInput[]
-    OR?: BasicDetailsScalarWhereInput[]
-    NOT?: BasicDetailsScalarWhereInput | BasicDetailsScalarWhereInput[]
-    id?: StringFilter<"BasicDetails"> | string
-    firstName?: StringFilter<"BasicDetails"> | string
-    lastName?: StringFilter<"BasicDetails"> | string
-    job_title?: StringFilter<"BasicDetails"> | string
-    address?: StringFilter<"BasicDetails"> | string
-    phone?: StringFilter<"BasicDetails"> | string
-    email?: StringFilter<"BasicDetails"> | string
-    prof_summery?: StringNullableFilter<"BasicDetails"> | string | null
-    user_id?: StringFilter<"BasicDetails"> | string
+  export type BasicDetailsUncheckedUpdateWithoutUserInput = {
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    job_title?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    prof_summery?: NullableStringFieldUpdateOperationsInput | string | null
+    education?: EducationUncheckedUpdateManyWithoutBasicdetailsNestedInput
+    profession?: ProfessionUncheckedUpdateManyWithoutBasicdetailsNestedInput
   }
 
   export type EducationCreateWithoutBasicdetailsInput = {
@@ -6941,51 +6888,6 @@ export namespace Prisma {
     prof_summery?: NullableStringFieldUpdateOperationsInput | string | null
     user_id?: StringFieldUpdateOperationsInput | string
     education?: EducationUncheckedUpdateManyWithoutBasicdetailsNestedInput
-  }
-
-  export type BasicDetailsCreateManyUserInput = {
-    id?: string
-    firstName: string
-    lastName: string
-    job_title: string
-    address: string
-    phone: string
-    email: string
-    prof_summery?: string | null
-  }
-
-  export type BasicDetailsUpdateWithoutUserInput = {
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    job_title?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    prof_summery?: NullableStringFieldUpdateOperationsInput | string | null
-    education?: EducationUpdateManyWithoutBasicdetailsNestedInput
-    profession?: ProfessionUpdateManyWithoutBasicdetailsNestedInput
-  }
-
-  export type BasicDetailsUncheckedUpdateWithoutUserInput = {
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    job_title?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    prof_summery?: NullableStringFieldUpdateOperationsInput | string | null
-    education?: EducationUncheckedUpdateManyWithoutBasicdetailsNestedInput
-    profession?: ProfessionUncheckedUpdateManyWithoutBasicdetailsNestedInput
-  }
-
-  export type BasicDetailsUncheckedUpdateManyWithoutUserInput = {
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    job_title?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    prof_summery?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EducationCreateManyBasicdetailsInput = {
