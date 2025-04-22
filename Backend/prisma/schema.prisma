@@ -35,20 +35,20 @@ model BasicDetails {
 }
 
 model Education {
-  id             String @id @default(auto()) @map("_id") @db.ObjectId
-  universityName String
-  degree         String
-  major          String
-  startDate      String
-  endDate        String
-  description    String
-
-  basicdetails    BasicDetails @relation(fields: [BasicDetails_id], references: [id])
-  BasicDetails_id String       @db.ObjectId
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  universityName  String
+  degree          String
+  major           String
+  startDate       String
+  endDate         String
+  description     String
+  resume_url      String?
+  basicdetails    BasicDetails? @relation(fields: [BasicDetails_id], references: [id])
+  BasicDetails_id String?       @db.ObjectId
 }
 
 model Profession {
-  id              String       @id @default(auto()) @map("_id") @db.ObjectId
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
   title           String
   companyName     String
   city            String
@@ -56,6 +56,6 @@ model Profession {
   startDate       String
   endDate         String
   workSummary     String
-  basicdetails    BasicDetails @relation(fields: [BasicDetails_id], references: [id])
-  BasicDetails_id String       @db.ObjectId
+  basicdetails    BasicDetails? @relation(fields: [BasicDetails_id], references: [id])
+  BasicDetails_id String?       @db.ObjectId
 }
