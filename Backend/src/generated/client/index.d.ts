@@ -3243,6 +3243,7 @@ export namespace Prisma {
     startDate: string | null
     endDate: string | null
     description: string | null
+    resume_url: string | null
     BasicDetails_id: string | null
   }
 
@@ -3254,6 +3255,7 @@ export namespace Prisma {
     startDate: string | null
     endDate: string | null
     description: string | null
+    resume_url: string | null
     BasicDetails_id: string | null
   }
 
@@ -3265,6 +3267,7 @@ export namespace Prisma {
     startDate: number
     endDate: number
     description: number
+    resume_url: number
     BasicDetails_id: number
     _all: number
   }
@@ -3278,6 +3281,7 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     description?: true
+    resume_url?: true
     BasicDetails_id?: true
   }
 
@@ -3289,6 +3293,7 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     description?: true
+    resume_url?: true
     BasicDetails_id?: true
   }
 
@@ -3300,6 +3305,7 @@ export namespace Prisma {
     startDate?: true
     endDate?: true
     description?: true
+    resume_url?: true
     BasicDetails_id?: true
     _all?: true
   }
@@ -3384,7 +3390,8 @@ export namespace Prisma {
     startDate: string
     endDate: string
     description: string
-    BasicDetails_id: string
+    resume_url: string | null
+    BasicDetails_id: string | null
     _count: EducationCountAggregateOutputType | null
     _min: EducationMinAggregateOutputType | null
     _max: EducationMaxAggregateOutputType | null
@@ -3412,8 +3419,9 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     description?: boolean
+    resume_url?: boolean
     BasicDetails_id?: boolean
-    basicdetails?: boolean | BasicDetailsDefaultArgs<ExtArgs>
+    basicdetails?: boolean | Education$basicdetailsArgs<ExtArgs>
   }, ExtArgs["result"]["education"]>
 
 
@@ -3426,18 +3434,19 @@ export namespace Prisma {
     startDate?: boolean
     endDate?: boolean
     description?: boolean
+    resume_url?: boolean
     BasicDetails_id?: boolean
   }
 
-  export type EducationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "universityName" | "degree" | "major" | "startDate" | "endDate" | "description" | "BasicDetails_id", ExtArgs["result"]["education"]>
+  export type EducationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "universityName" | "degree" | "major" | "startDate" | "endDate" | "description" | "resume_url" | "BasicDetails_id", ExtArgs["result"]["education"]>
   export type EducationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    basicdetails?: boolean | BasicDetailsDefaultArgs<ExtArgs>
+    basicdetails?: boolean | Education$basicdetailsArgs<ExtArgs>
   }
 
   export type $EducationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Education"
     objects: {
-      basicdetails: Prisma.$BasicDetailsPayload<ExtArgs>
+      basicdetails: Prisma.$BasicDetailsPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3447,7 +3456,8 @@ export namespace Prisma {
       startDate: string
       endDate: string
       description: string
-      BasicDetails_id: string
+      resume_url: string | null
+      BasicDetails_id: string | null
     }, ExtArgs["result"]["education"]>
     composites: {}
   }
@@ -3811,7 +3821,7 @@ export namespace Prisma {
    */
   export interface Prisma__EducationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    basicdetails<T extends BasicDetailsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BasicDetailsDefaultArgs<ExtArgs>>): Prisma__BasicDetailsClient<$Result.GetResult<Prisma.$BasicDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    basicdetails<T extends Education$basicdetailsArgs<ExtArgs> = {}>(args?: Subset<T, Education$basicdetailsArgs<ExtArgs>>): Prisma__BasicDetailsClient<$Result.GetResult<Prisma.$BasicDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3848,6 +3858,7 @@ export namespace Prisma {
     readonly startDate: FieldRef<"Education", 'String'>
     readonly endDate: FieldRef<"Education", 'String'>
     readonly description: FieldRef<"Education", 'String'>
+    readonly resume_url: FieldRef<"Education", 'String'>
     readonly BasicDetails_id: FieldRef<"Education", 'String'>
   }
     
@@ -4219,6 +4230,25 @@ export namespace Prisma {
   }
 
   /**
+   * Education.basicdetails
+   */
+  export type Education$basicdetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BasicDetails
+     */
+    select?: BasicDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BasicDetails
+     */
+    omit?: BasicDetailsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BasicDetailsInclude<ExtArgs> | null
+    where?: BasicDetailsWhereInput
+  }
+
+  /**
    * Education without action
    */
   export type EducationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4403,7 +4433,7 @@ export namespace Prisma {
     startDate: string
     endDate: string
     workSummary: string
-    BasicDetails_id: string
+    BasicDetails_id: string | null
     _count: ProfessionCountAggregateOutputType | null
     _min: ProfessionMinAggregateOutputType | null
     _max: ProfessionMaxAggregateOutputType | null
@@ -4433,7 +4463,7 @@ export namespace Prisma {
     endDate?: boolean
     workSummary?: boolean
     BasicDetails_id?: boolean
-    basicdetails?: boolean | BasicDetailsDefaultArgs<ExtArgs>
+    basicdetails?: boolean | Profession$basicdetailsArgs<ExtArgs>
   }, ExtArgs["result"]["profession"]>
 
 
@@ -4452,13 +4482,13 @@ export namespace Prisma {
 
   export type ProfessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "companyName" | "city" | "state" | "startDate" | "endDate" | "workSummary" | "BasicDetails_id", ExtArgs["result"]["profession"]>
   export type ProfessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    basicdetails?: boolean | BasicDetailsDefaultArgs<ExtArgs>
+    basicdetails?: boolean | Profession$basicdetailsArgs<ExtArgs>
   }
 
   export type $ProfessionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Profession"
     objects: {
-      basicdetails: Prisma.$BasicDetailsPayload<ExtArgs>
+      basicdetails: Prisma.$BasicDetailsPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4469,7 +4499,7 @@ export namespace Prisma {
       startDate: string
       endDate: string
       workSummary: string
-      BasicDetails_id: string
+      BasicDetails_id: string | null
     }, ExtArgs["result"]["profession"]>
     composites: {}
   }
@@ -4833,7 +4863,7 @@ export namespace Prisma {
    */
   export interface Prisma__ProfessionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    basicdetails<T extends BasicDetailsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BasicDetailsDefaultArgs<ExtArgs>>): Prisma__BasicDetailsClient<$Result.GetResult<Prisma.$BasicDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    basicdetails<T extends Profession$basicdetailsArgs<ExtArgs> = {}>(args?: Subset<T, Profession$basicdetailsArgs<ExtArgs>>): Prisma__BasicDetailsClient<$Result.GetResult<Prisma.$BasicDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5242,6 +5272,25 @@ export namespace Prisma {
   }
 
   /**
+   * Profession.basicdetails
+   */
+  export type Profession$basicdetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BasicDetails
+     */
+    select?: BasicDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BasicDetails
+     */
+    omit?: BasicDetailsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BasicDetailsInclude<ExtArgs> | null
+    where?: BasicDetailsWhereInput
+  }
+
+  /**
    * Profession without action
    */
   export type ProfessionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5299,6 +5348,7 @@ export namespace Prisma {
     startDate: 'startDate',
     endDate: 'endDate',
     description: 'description',
+    resume_url: 'resume_url',
     BasicDetails_id: 'BasicDetails_id'
   };
 
@@ -5538,8 +5588,9 @@ export namespace Prisma {
     startDate?: StringFilter<"Education"> | string
     endDate?: StringFilter<"Education"> | string
     description?: StringFilter<"Education"> | string
-    BasicDetails_id?: StringFilter<"Education"> | string
-    basicdetails?: XOR<BasicDetailsScalarRelationFilter, BasicDetailsWhereInput>
+    resume_url?: StringNullableFilter<"Education"> | string | null
+    BasicDetails_id?: StringNullableFilter<"Education"> | string | null
+    basicdetails?: XOR<BasicDetailsNullableScalarRelationFilter, BasicDetailsWhereInput> | null
   }
 
   export type EducationOrderByWithRelationInput = {
@@ -5550,6 +5601,7 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     description?: SortOrder
+    resume_url?: SortOrder
     BasicDetails_id?: SortOrder
     basicdetails?: BasicDetailsOrderByWithRelationInput
   }
@@ -5565,8 +5617,9 @@ export namespace Prisma {
     startDate?: StringFilter<"Education"> | string
     endDate?: StringFilter<"Education"> | string
     description?: StringFilter<"Education"> | string
-    BasicDetails_id?: StringFilter<"Education"> | string
-    basicdetails?: XOR<BasicDetailsScalarRelationFilter, BasicDetailsWhereInput>
+    resume_url?: StringNullableFilter<"Education"> | string | null
+    BasicDetails_id?: StringNullableFilter<"Education"> | string | null
+    basicdetails?: XOR<BasicDetailsNullableScalarRelationFilter, BasicDetailsWhereInput> | null
   }, "id">
 
   export type EducationOrderByWithAggregationInput = {
@@ -5577,6 +5630,7 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     description?: SortOrder
+    resume_url?: SortOrder
     BasicDetails_id?: SortOrder
     _count?: EducationCountOrderByAggregateInput
     _max?: EducationMaxOrderByAggregateInput
@@ -5594,7 +5648,8 @@ export namespace Prisma {
     startDate?: StringWithAggregatesFilter<"Education"> | string
     endDate?: StringWithAggregatesFilter<"Education"> | string
     description?: StringWithAggregatesFilter<"Education"> | string
-    BasicDetails_id?: StringWithAggregatesFilter<"Education"> | string
+    resume_url?: StringNullableWithAggregatesFilter<"Education"> | string | null
+    BasicDetails_id?: StringNullableWithAggregatesFilter<"Education"> | string | null
   }
 
   export type ProfessionWhereInput = {
@@ -5609,8 +5664,8 @@ export namespace Prisma {
     startDate?: StringFilter<"Profession"> | string
     endDate?: StringFilter<"Profession"> | string
     workSummary?: StringFilter<"Profession"> | string
-    BasicDetails_id?: StringFilter<"Profession"> | string
-    basicdetails?: XOR<BasicDetailsScalarRelationFilter, BasicDetailsWhereInput>
+    BasicDetails_id?: StringNullableFilter<"Profession"> | string | null
+    basicdetails?: XOR<BasicDetailsNullableScalarRelationFilter, BasicDetailsWhereInput> | null
   }
 
   export type ProfessionOrderByWithRelationInput = {
@@ -5638,8 +5693,8 @@ export namespace Prisma {
     startDate?: StringFilter<"Profession"> | string
     endDate?: StringFilter<"Profession"> | string
     workSummary?: StringFilter<"Profession"> | string
-    BasicDetails_id?: StringFilter<"Profession"> | string
-    basicdetails?: XOR<BasicDetailsScalarRelationFilter, BasicDetailsWhereInput>
+    BasicDetails_id?: StringNullableFilter<"Profession"> | string | null
+    basicdetails?: XOR<BasicDetailsNullableScalarRelationFilter, BasicDetailsWhereInput> | null
   }, "id">
 
   export type ProfessionOrderByWithAggregationInput = {
@@ -5669,7 +5724,7 @@ export namespace Prisma {
     startDate?: StringWithAggregatesFilter<"Profession"> | string
     endDate?: StringWithAggregatesFilter<"Profession"> | string
     workSummary?: StringWithAggregatesFilter<"Profession"> | string
-    BasicDetails_id?: StringWithAggregatesFilter<"Profession"> | string
+    BasicDetails_id?: StringNullableWithAggregatesFilter<"Profession"> | string | null
   }
 
   export type userCreateInput = {
@@ -5830,7 +5885,8 @@ export namespace Prisma {
     startDate: string
     endDate: string
     description: string
-    basicdetails: BasicDetailsCreateNestedOneWithoutEducationInput
+    resume_url?: string | null
+    basicdetails?: BasicDetailsCreateNestedOneWithoutEducationInput
   }
 
   export type EducationUncheckedCreateInput = {
@@ -5841,7 +5897,8 @@ export namespace Prisma {
     startDate: string
     endDate: string
     description: string
-    BasicDetails_id: string
+    resume_url?: string | null
+    BasicDetails_id?: string | null
   }
 
   export type EducationUpdateInput = {
@@ -5851,7 +5908,8 @@ export namespace Prisma {
     startDate?: StringFieldUpdateOperationsInput | string
     endDate?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    basicdetails?: BasicDetailsUpdateOneRequiredWithoutEducationNestedInput
+    resume_url?: NullableStringFieldUpdateOperationsInput | string | null
+    basicdetails?: BasicDetailsUpdateOneWithoutEducationNestedInput
   }
 
   export type EducationUncheckedUpdateInput = {
@@ -5861,7 +5919,8 @@ export namespace Prisma {
     startDate?: StringFieldUpdateOperationsInput | string
     endDate?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    BasicDetails_id?: StringFieldUpdateOperationsInput | string
+    resume_url?: NullableStringFieldUpdateOperationsInput | string | null
+    BasicDetails_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EducationCreateManyInput = {
@@ -5872,7 +5931,8 @@ export namespace Prisma {
     startDate: string
     endDate: string
     description: string
-    BasicDetails_id: string
+    resume_url?: string | null
+    BasicDetails_id?: string | null
   }
 
   export type EducationUpdateManyMutationInput = {
@@ -5882,6 +5942,7 @@ export namespace Prisma {
     startDate?: StringFieldUpdateOperationsInput | string
     endDate?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    resume_url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EducationUncheckedUpdateManyInput = {
@@ -5891,7 +5952,8 @@ export namespace Prisma {
     startDate?: StringFieldUpdateOperationsInput | string
     endDate?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    BasicDetails_id?: StringFieldUpdateOperationsInput | string
+    resume_url?: NullableStringFieldUpdateOperationsInput | string | null
+    BasicDetails_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProfessionCreateInput = {
@@ -5903,7 +5965,7 @@ export namespace Prisma {
     startDate: string
     endDate: string
     workSummary: string
-    basicdetails: BasicDetailsCreateNestedOneWithoutProfessionInput
+    basicdetails?: BasicDetailsCreateNestedOneWithoutProfessionInput
   }
 
   export type ProfessionUncheckedCreateInput = {
@@ -5915,7 +5977,7 @@ export namespace Prisma {
     startDate: string
     endDate: string
     workSummary: string
-    BasicDetails_id: string
+    BasicDetails_id?: string | null
   }
 
   export type ProfessionUpdateInput = {
@@ -5926,7 +5988,7 @@ export namespace Prisma {
     startDate?: StringFieldUpdateOperationsInput | string
     endDate?: StringFieldUpdateOperationsInput | string
     workSummary?: StringFieldUpdateOperationsInput | string
-    basicdetails?: BasicDetailsUpdateOneRequiredWithoutProfessionNestedInput
+    basicdetails?: BasicDetailsUpdateOneWithoutProfessionNestedInput
   }
 
   export type ProfessionUncheckedUpdateInput = {
@@ -5937,7 +5999,7 @@ export namespace Prisma {
     startDate?: StringFieldUpdateOperationsInput | string
     endDate?: StringFieldUpdateOperationsInput | string
     workSummary?: StringFieldUpdateOperationsInput | string
-    BasicDetails_id?: StringFieldUpdateOperationsInput | string
+    BasicDetails_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProfessionCreateManyInput = {
@@ -5949,7 +6011,7 @@ export namespace Prisma {
     startDate: string
     endDate: string
     workSummary: string
-    BasicDetails_id: string
+    BasicDetails_id?: string | null
   }
 
   export type ProfessionUpdateManyMutationInput = {
@@ -5970,7 +6032,7 @@ export namespace Prisma {
     startDate?: StringFieldUpdateOperationsInput | string
     endDate?: StringFieldUpdateOperationsInput | string
     workSummary?: StringFieldUpdateOperationsInput | string
-    BasicDetails_id?: StringFieldUpdateOperationsInput | string
+    BasicDetails_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -6161,11 +6223,6 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type BasicDetailsScalarRelationFilter = {
-    is?: BasicDetailsWhereInput
-    isNot?: BasicDetailsWhereInput
-  }
-
   export type EducationCountOrderByAggregateInput = {
     id?: SortOrder
     universityName?: SortOrder
@@ -6174,6 +6231,7 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     description?: SortOrder
+    resume_url?: SortOrder
     BasicDetails_id?: SortOrder
   }
 
@@ -6185,6 +6243,7 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     description?: SortOrder
+    resume_url?: SortOrder
     BasicDetails_id?: SortOrder
   }
 
@@ -6196,6 +6255,7 @@ export namespace Prisma {
     startDate?: SortOrder
     endDate?: SortOrder
     description?: SortOrder
+    resume_url?: SortOrder
     BasicDetails_id?: SortOrder
   }
 
@@ -6385,10 +6445,12 @@ export namespace Prisma {
     connect?: BasicDetailsWhereUniqueInput
   }
 
-  export type BasicDetailsUpdateOneRequiredWithoutEducationNestedInput = {
+  export type BasicDetailsUpdateOneWithoutEducationNestedInput = {
     create?: XOR<BasicDetailsCreateWithoutEducationInput, BasicDetailsUncheckedCreateWithoutEducationInput>
     connectOrCreate?: BasicDetailsCreateOrConnectWithoutEducationInput
     upsert?: BasicDetailsUpsertWithoutEducationInput
+    disconnect?: boolean
+    delete?: BasicDetailsWhereInput | boolean
     connect?: BasicDetailsWhereUniqueInput
     update?: XOR<XOR<BasicDetailsUpdateToOneWithWhereWithoutEducationInput, BasicDetailsUpdateWithoutEducationInput>, BasicDetailsUncheckedUpdateWithoutEducationInput>
   }
@@ -6399,10 +6461,12 @@ export namespace Prisma {
     connect?: BasicDetailsWhereUniqueInput
   }
 
-  export type BasicDetailsUpdateOneRequiredWithoutProfessionNestedInput = {
+  export type BasicDetailsUpdateOneWithoutProfessionNestedInput = {
     create?: XOR<BasicDetailsCreateWithoutProfessionInput, BasicDetailsUncheckedCreateWithoutProfessionInput>
     connectOrCreate?: BasicDetailsCreateOrConnectWithoutProfessionInput
     upsert?: BasicDetailsUpsertWithoutProfessionInput
+    disconnect?: boolean
+    delete?: BasicDetailsWhereInput | boolean
     connect?: BasicDetailsWhereUniqueInput
     update?: XOR<XOR<BasicDetailsUpdateToOneWithWhereWithoutProfessionInput, BasicDetailsUpdateWithoutProfessionInput>, BasicDetailsUncheckedUpdateWithoutProfessionInput>
   }
@@ -6595,6 +6659,7 @@ export namespace Prisma {
     startDate: string
     endDate: string
     description: string
+    resume_url?: string | null
   }
 
   export type EducationUncheckedCreateWithoutBasicdetailsInput = {
@@ -6605,6 +6670,7 @@ export namespace Prisma {
     startDate: string
     endDate: string
     description: string
+    resume_url?: string | null
   }
 
   export type EducationCreateOrConnectWithoutBasicdetailsInput = {
@@ -6697,7 +6763,8 @@ export namespace Prisma {
     startDate?: StringFilter<"Education"> | string
     endDate?: StringFilter<"Education"> | string
     description?: StringFilter<"Education"> | string
-    BasicDetails_id?: StringFilter<"Education"> | string
+    resume_url?: StringNullableFilter<"Education"> | string | null
+    BasicDetails_id?: StringNullableFilter<"Education"> | string | null
   }
 
   export type ProfessionUpsertWithWhereUniqueWithoutBasicdetailsInput = {
@@ -6728,7 +6795,7 @@ export namespace Prisma {
     startDate?: StringFilter<"Profession"> | string
     endDate?: StringFilter<"Profession"> | string
     workSummary?: StringFilter<"Profession"> | string
-    BasicDetails_id?: StringFilter<"Profession"> | string
+    BasicDetails_id?: StringNullableFilter<"Profession"> | string | null
   }
 
   export type userUpsertWithoutBasidetailsInput = {
@@ -6898,6 +6965,7 @@ export namespace Prisma {
     startDate: string
     endDate: string
     description: string
+    resume_url?: string | null
   }
 
   export type ProfessionCreateManyBasicdetailsInput = {
@@ -6918,6 +6986,7 @@ export namespace Prisma {
     startDate?: StringFieldUpdateOperationsInput | string
     endDate?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    resume_url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EducationUncheckedUpdateWithoutBasicdetailsInput = {
@@ -6927,6 +6996,7 @@ export namespace Prisma {
     startDate?: StringFieldUpdateOperationsInput | string
     endDate?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    resume_url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EducationUncheckedUpdateManyWithoutBasicdetailsInput = {
@@ -6936,6 +7006,7 @@ export namespace Prisma {
     startDate?: StringFieldUpdateOperationsInput | string
     endDate?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    resume_url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProfessionUpdateWithoutBasicdetailsInput = {
