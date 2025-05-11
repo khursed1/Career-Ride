@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // dashboard/resume/{resume-id}/edit
 import { useParams } from "react-router-dom";
 import { ResumeInfoContext } from "../../../context/ResumeInfoContext";

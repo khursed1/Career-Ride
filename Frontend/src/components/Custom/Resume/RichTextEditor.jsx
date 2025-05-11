@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 {/* Text editor for adding text styles like bold, italic, 
                     bullet lists etc */}
 import { useState } from 'react';

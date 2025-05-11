@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 const ResumeListCard = ({ img }) => {
     return (
         <div className="pt-5">
